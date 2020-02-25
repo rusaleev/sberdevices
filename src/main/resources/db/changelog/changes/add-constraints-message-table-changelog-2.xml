@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="rusaleev" id="2">
+        <addUniqueConstraint
+            columnNames="id"
+            constraintName="id_unique_constraint"
+            deferrable="false"
+            disabled="false"
+            initiallyDeferred="false"
+            tableName="message"
+            tablespace="id_unique_index"/>
+        <rollback>
+            <dropUniqueConstraint
+            constraintName="id_unique_constraint"
+            tableName="message"
+            uniqueColumns="id"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet author="rusaleev" id="3">
+    	<modifyDataType
+            columnName="id"
+            newDataType="int(11) unsigned"
+            tableName="message"/>
+    	<rollback>
+    		<modifyDataType catalogName="cat"
+            columnName="id"
+            newDataType="int(11)"
+            tableName="message"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
